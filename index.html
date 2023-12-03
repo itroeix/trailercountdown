@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('background.png') no-repeat;
+            background-size: cover;
+            color: white;
+            letter-spacing: 0.25em;
+        }
+
+        .countdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: opacity 2s ease-out;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        .countdown div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .countdown h2 {
+            margin-top: 0;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .countdown-container.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .finalMessage {
+            text-align: center;
+            font-size: 24px;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .gradient_anim_btn {
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            font-size: 25px;
+            margin: 12px;
+            padding: 14px 20px 14px 20px;
+            border-radius: 0.7em;
+            border: none;
+            background: -webkit-linear-gradient(225deg, rgb(255, 201, 94), rgb(255, 86, 249),
+                    rgb(88, 216, 255)) 0% 0% / 300% 300%;
+            background-size: 200% auto;
+            -webkit-animation: gradient_move 3s ease infinite;
+            animation: gradient_move 3s ease infinite;
+        }
+
+        @-webkit-keyframes gradient_move {
+            0% {
+                background-position: 0% 90%
+            }
+
+            50% {
+                background-position: 90% 9%
+            }
+
+            100% {
+                background-position: 0% 90%
+            }
+        }
+
+        @keyframes gradient_move {
+            0% {
+                background-position: 0% 92%
+            }
+
+            50% {
+                background-position: 100% 9%
+            }
+
+            100% {
+                background-position: 0% 92%
+            }
+        }
+
+        .titleMsg {
+            font-size: 50px;
+        }
+
+        .watchMsg {
+            font-size: 30px;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="countdown-container">
+        <p></p>
+        <img src="https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/5f52ba580606a589f4ac105866012722.svg">
+        <p></p>
+        <h1>TRAILER 1 COUNTDOWN</h1>
+
+        <div class="countdown">
+            <div>
+                <h2 class="days">?</h2>
+                <p>DAYS</p>
+            </div>
+            <div>
+                <h2 class="hours">?</h2>
+                <p>HOURS</p>
+            </div>
+            <div>
+                <h2 class="minutes">?</h2>
+                <p>MINUTES</p>
+            </div>
+            <div>
+                <h2 class="seconds">?</h2>
+                <p>SECONDS</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="finalMessage">
+        <h1 class="titleMsg">TRAILER RELEASED</h1>
+        <p class="watchMsg">Watch the trailer on YouTube</p>
+        <button class="gradient_anim_btn" onclick="redirectToYouTube()">Watch</button>
+    </div>
+
+    <script>
+        const targetUnixTimestamp = 1701784800;
+        const targetDate = new Date(targetUnixTimestamp * 1000);
+
+        function updateCountdown() {
+            const currentDate = new Date();
+            let difference = targetDate - currentDate;
+
+            if (difference < 0) {
+                difference = 0;
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.querySelector('.days').textContent = days;
+            document.querySelector('.hours').textContent = hours;
+            document.querySelector('.minutes').textContent = minutes;
+            document.querySelector('.seconds').textContent = seconds;
+
+            if (difference <= 0) {
+                const countdownContainer = document.querySelector('.countdown-container');
+                setTimeout(() => {
+                    countdownContainer.classList.add('hidden');
+
+                    countdownContainer.addEventListener('transitionend', function () {
+                        countdownContainer.remove();
+                        document.querySelector('.finalMessage').style.display = 'block';
+                    }, { once: true });
+                }, 500);
+            } else {
+                requestAnimationFrame(updateCountdown);
+            }
+        }
+
+        updateCountdown();
+
+        function redirectToYouTube() {
+            window.location.href = 'https://www.youtube.com/@RockstarGames/videos';
+        }
+    </script>
+</body>
+
+</html>
