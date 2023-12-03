@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
+    <title>Trailer Countdown</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -32,6 +32,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             font-size: 18px;
+            margin-top: 20px;
         }
 
         .countdown div {
@@ -65,7 +66,7 @@
             cursor: pointer;
             color: white;
             font-weight: 600;
-            font-size: 25px;
+            font-size: 18px;
             margin: 12px;
             padding: 14px 20px 14px 20px;
             border-radius: 0.7em;
@@ -106,12 +107,22 @@
         }
 
         .titleMsg {
-            font-size: 50px;
+            font-size: 30px;
         }
 
         .watchMsg {
-            font-size: 30px;
+            font-size: 18px;
             letter-spacing: 0.05em;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            body {
+                background-position: center center;
+            }
         }
     </style>
 </head>
@@ -119,9 +130,10 @@
 <body>
     <div class="countdown-container">
         <p></p>
-        <img src="https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/5f52ba580606a589f4ac105866012722.svg">
+        <img
+            src="https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/5f52ba580606a589f4ac105866012722.svg">
         <p></p>
-        <h1>TRAILER 1 COUNTDOWN</h1>
+        <h1 style="text-align: center;">TRAILER 1 COUNTDOWN</h1>
 
         <div class="countdown">
             <div>
