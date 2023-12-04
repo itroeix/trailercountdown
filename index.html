@@ -17,7 +17,22 @@
             background: url('background.png') no-repeat;
             background-size: cover;
             color: white;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.12em;
+        }
+    
+        .notification-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(225deg, rgb(148, 87, 235), rgb(255, 86, 249), rgb(255, 201, 94));
+            color: white;
+            font-weight: bold;
+            z-index: 1000; /* Asegura que esté en la parte superior */
         }
 
         .countdown-container {
@@ -128,6 +143,11 @@
 </head>
 
 <body>
+    <div class="notification-bar">
+        <p style="margin: 0;">Rockstar Games is premiering on YouTube!</p>
+        <button class="gradient_anim_btn" onclick="redirectToYouTube()">Watch</button>
+    </div>
+
     <div class="countdown-container">
         <p></p>
         <img
@@ -162,7 +182,8 @@
     </div>
 
     <script>
-        const targetUnixTimestamp = 1701784800;
+        const dateNow = Math.round(Date.now() / 1000)
+        const targetUnixTimestamp = dateNow + 10;
         const targetDate = new Date(targetUnixTimestamp * 1000);
 
         function updateCountdown() {
@@ -201,7 +222,7 @@
         updateCountdown();
 
         function redirectToYouTube() {
-            window.location.href = 'https://www.youtube.com/@RockstarGames/videos';
+            window.location.href = 'https://www.youtube.com/watch?v=QdBZY2fkU-0';
         }
     </script>
 </body>
