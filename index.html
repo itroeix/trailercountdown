@@ -29,10 +29,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(225deg, rgb(148, 87, 235), rgb(255, 86, 249), rgb(255, 201, 94));
+            background: linear-gradient(225deg, rgb(180, 126, 255),rgb(255, 124, 251)),rgb(255, 67, 224);
             color: white;
             font-weight: bold;
-            z-index: 1000; /* Asegura que esté en la parte superior */
+            z-index: 1000;
         }
 
         .countdown-container {
@@ -44,7 +44,7 @@
 
         .countdown {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             font-size: 18px;
             margin-top: 20px;
@@ -131,10 +131,6 @@
         }
 
         @media only screen and (max-width: 600px) {
-            .countdown {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             body {
                 background-position: center center;
             }
@@ -144,7 +140,7 @@
 
 <body>
     <div class="notification-bar">
-        <p style="margin: 0;">Rockstar Games is premiering on YouTube!</p>
+        <p style="margin: 10px;">Rockstar Games is premiering on YouTube!</p>
         <button class="gradient_anim_btn" onclick="redirectToYouTube()">Watch</button>
     </div>
 
@@ -156,10 +152,6 @@
         <h1 style="text-align: center;">TRAILER 1 COUNTDOWN</h1>
 
         <div class="countdown">
-            <div>
-                <h2 class="days">?</h2>
-                <p>DAYS</p>
-            </div>
             <div>
                 <h2 class="hours">?</h2>
                 <p>HOURS</p>
@@ -182,8 +174,7 @@
     </div>
 
     <script>
-        const dateNow = Math.round(Date.now() / 1000)
-        const targetUnixTimestamp = dateNow + 10;
+        const targetUnixTimestamp = 1701784800;
         const targetDate = new Date(targetUnixTimestamp * 1000);
 
         function updateCountdown() {
@@ -199,7 +190,6 @@
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            document.querySelector('.days').textContent = days;
             document.querySelector('.hours').textContent = hours;
             document.querySelector('.minutes').textContent = minutes;
             document.querySelector('.seconds').textContent = seconds;
